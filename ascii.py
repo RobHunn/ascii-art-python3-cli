@@ -14,9 +14,7 @@ from helper import set_chars, getChar, arg_setup_string
 parser = argparse.ArgumentParser(
     description="Turn any photo into ascii art from the Command Line."
 )
-#  Add all parser arguments.
-#  This is kinda weird, just wanted to see if I could make this script
-#  less cluttered by moving parser args to helper.py and process here.
+#  Add all parser arguments from helper file
 [eval(w) for w in arg_setup_string.split("|")]
 
 # convert parser.parse_args() SimpleNamespace to dictionary for unpackability.
@@ -47,7 +45,7 @@ def ascii_art(charW, charH, scale, image, output):
             for j in range(width):
                 r, g, b = pix[j, i]
                 h = int((r + g + b) / 3)
-                # pix[j, i] = (h, h, h)  # what the heck does this do? nothing me-thinks.
+                # pix[j, i] = (h, h, h)  # WFT?? i dunno....
                 char = getChar(h)
                 text_file.write(char)
                 d.text(
