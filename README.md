@@ -11,6 +11,8 @@ The larger the image size the better the resolution.
 - name the output file      --output
 
 ![Black n white](/images/model2.png)
+
+
 ## Requirements
 Python (3)<br>
 
@@ -32,3 +34,5 @@ Make art image by first calling the start file then passing you image file name
 Optional flags
 
 >python ascii.py img.png --scale=.1 --charW=12 --charH=18 --rev=False --output=newimg
+
+![Black n white](/images/output.png)
