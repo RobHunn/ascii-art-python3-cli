@@ -19,7 +19,7 @@ pip install -r requirements.txt<br>
 Tested on<br>
 Mac OSX 10.15.4
 
-##Download udemy-dl
+##Download ascii-art-python3-cli
 You can download the latest version of ascii-art-python3-cli by cloning the GitHub repository.
 
 git clone https://github.com/RobHunn/ascii-art-python3-cli
