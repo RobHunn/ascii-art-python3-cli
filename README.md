@@ -10,7 +10,7 @@ The larger the image size the better the resolution.
 - revers character order for white background img   --rev
 - name the output file      --output
 
-![Black n white](/images/images/model2.png)
+![Black n white](/images/model2.png)
 ## Requirements
 Python (3)<br>
 
