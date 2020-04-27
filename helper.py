@@ -18,7 +18,7 @@ def getChar(val):
 
 
 def check_interactive(args):
-    """If image is None or -i flag set query user for input."""
+    """If image is None or -i flag was entered query user for input."""
     if not args["image"]:
         interactive = True
     else:
@@ -105,12 +105,12 @@ parser.add_argument(
 
 verboser = {
         "image": "Image file to process: ",
-        "output": 'output files name (leave blank for default "output"): ',
+        "output": 'Output files name (leave blank for default "output"): ',
         "font_size": "Font size to use as pixel (leave blank for default 15): ",
-        "charW": "character width (leave blank for default 12): ",
-        "charH": "character height (leave blank for default 18): ",
-        "scale": "scale image (leave blank for default scale 0.10): ",
-        "rev": "invert character scheme for white background image? (leave blank default): "
+        "charW": "Character width (leave blank for default 12): ",
+        "charH": "Character height (leave blank for default 18): ",
+        "scale": "Scale for image (leave blank for default scale 0.10): ",
+        "rev": "Invert character scheme for white background image? (leave blank default): "
         }
 
 default = {

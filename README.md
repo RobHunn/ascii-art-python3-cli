@@ -1,6 +1,6 @@
 # ascii-art-python3-cli
 
-Python3 cli tool for making high res ascci art images. <br>
+Python3 cli tool for making high res ASCII art images. <br>
 Full color or black and white photos. <br>
 The larger the image size the better the resolution.
 
@@ -12,7 +12,7 @@ Adjust features interactively or by command-line flags.
 - adjust character font-size --font-size
 - adjust a character width --charW
 - adjust a character height --charH
-- reverse character order for white background img --rev
+- reverse character order for white background image --rev
 - name the output file --output
 - query me for remaining options -i
 
@@ -39,7 +39,7 @@ git clone https://github.com/RobHunn/ascii-art-python3-cli
 
 ## Usage - Make art
 
-######Use any of these usage methods:
+##### Use any of these usage methods:
 
 1. `python ascii.py` then answer interactive questions.
 2. `python ascii.py img.jpg` output art with default settings<br>

@@ -14,13 +14,13 @@ from helper import arg_setup_string, check_interactive, set_chars, getChar, get_
 parser = argparse.ArgumentParser(
     description="Turn any photo into ascii art from the Command Line."
 )
-#  Add all parser arguments from helper file
+#  Add all parser arguments from helper file.
 [eval(w) for w in arg_setup_string.split("|")]
 
 # convert parser.parse_args() SimpleNamespace to dictionary for unpackability.
 args = dict(vars(parser.parse_args()))
 
-# check for interactive input
+# check for interactive input.
 args = check_interactive(args)
 
 # Set charachters to use as pixels and reverse the order if reverse arg is true.
