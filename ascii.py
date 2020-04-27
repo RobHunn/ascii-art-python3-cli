@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import argparse
-from helper import set_chars, getChar, check_interactive, get_hrgb, arg_setup_string
+from helper import arg_setup_string, check_interactive, set_chars, getChar, get_hrgb
 
 #
 # Developers:
@@ -27,11 +27,11 @@ args = check_interactive(args)
 set_chars(args)
 
 
-def ascii_art(charW, charH, scale, image, output):
+def ascii_art(image, font_size, scale, charW, charH, output):
     """Function to convert image into ascii art. Photo and text output."""
     im = Image.open(image)
 
-    fnt = ImageFont.truetype("arial.ttf", 15)
+    fnt = ImageFont.truetype("arial.ttf", int(font_size))
 
     width, height = im.size
     im = im.resize(

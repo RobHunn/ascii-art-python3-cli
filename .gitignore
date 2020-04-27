@@ -1,6 +1,8 @@
 
 Pipfile
 Pipfile.lock
-/.vscode
+.vscode
 venv
-__pycache__
+__pycache__/
+*.py[cod]
+images_rando/

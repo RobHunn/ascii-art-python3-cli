@@ -71,16 +71,23 @@ parser.add_argument(
     help='The name of the file to save the png and text output. Eg - img1. Optional (default is "output")',
 )|
 parser.add_argument(
+    "--font-size",
+    type=int,
+    default=15,
+    dest="font_size",
+    help="Font size used for pixel. Type=int default=15",
+)|
+parser.add_argument(
     "--charW",
     type=int,
     default=12,
-    help="The width of a single character Type=int default=12",
+    help="The width of a single character spot. Type=int default=12",
 )|
 parser.add_argument(
     "--charH",
     type=int,
     default=18,
-    help="The height of a single character Type=Int default=18",
+    help="The height of a single character spot. Type=Int default=18",
 )|
 parser.add_argument(
     "--scale",
@@ -99,6 +106,7 @@ parser.add_argument(
 verboser = {
         "image": "Image file to process: ",
         "output": 'output files name (leave blank for default "output"): ',
+        "font_size": "Font size to use as pixel (leave blank for default 15): ",
         "charW": "character width (leave blank for default 12): ",
         "charH": "character height (leave blank for default 18): ",
         "scale": "scale image (leave blank for default scale 0.10): ",
@@ -108,10 +116,11 @@ verboser = {
 default = {
     "image": None,
     "output": "output",
+    "font_size": 15,
     "charW": 12,
     "charH": 18,
     "scale": 0.1,
     "rev": False
     }
     
-num_args = ["charW", "charH", "scale"]
+num_args = ["font_size", "charW", "charH", "scale"]
