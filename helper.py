@@ -17,12 +17,52 @@ def getChar(val):
     return CHARS[int(val * INTERVAL)]
 
 
+def check_interactive(args):
+    """If image is None or -i flag set query user for input."""
+    if not args["image"]:
+        interactive = True
+    else:
+        interactive = args["i"] 
+    del args["i"]
+
+    if not interactive:
+        return args
+
+    # if args are default values query user for new values
+    new = {k: input(verboser[k]) for k, v in args.items() if v == default[k]}
+    # if no user input use default value. if input convert it to float if it is a number argument.
+    new = {k: default[k] 
+            if v == '' else 
+            float(v) if k in num_args else v 
+            for k, v in new.items()}
+
+    return {**args, **new}
+    
+
+def get_hrgb(pixel):
+    """Fuction to get r, g, b output plus h.
+       h is average of r, g, b.
+       If pixel is integer image is grayscale. set r,g,b = pixel.
+       Output: h, r, g, b
+    """
+    if isinstance(pixel, int):
+        return pixel, pixel, pixel, pixel
+    r, g, b, *_ = pixel
+    return int((r + g + b) / 3), r, g, b
+
+
 arg_setup_string = """
 parser.add_argument(
     "image",
     type=str,
-    # default=None,  # I think this is unneccesarry. Get same message with or without default when image is omitted.
+    default=None,
+    nargs="?",
     help="The image to convert to ascii art. Required.",
+)|
+parser.add_argument(
+    "-i",
+    action="store_true",
+    help='Interactive. User will be queried for input.',
 )|
 parser.add_argument(
     "--output",
@@ -54,3 +94,24 @@ parser.add_argument(
     default=False,
     help="Reverse the order of charachter maping to color input.",
 )"""
+
+
+verboser = {
+        "image": "Image file to process: ",
+        "output": 'output files name (leave blank for default "output"): ',
+        "charW": "character width (leave blank for default 12): ",
+        "charH": "character height (leave blank for default 18): ",
+        "scale": "scale image (leave blank for default scale 0.10): ",
+        "rev": "invert character scheme for white background image? (leave blank default): "
+        }
+
+default = {
+    "image": None,
+    "output": "output",
+    "charW": 12,
+    "charH": 18,
+    "scale": 0.1,
+    "rev": False
+    }
+    
+num_args = ["charW", "charH", "scale"]

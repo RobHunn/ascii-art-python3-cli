@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import argparse
-from helper import set_chars, getChar, arg_setup_string
+from helper import set_chars, getChar, check_interactive, get_hrgb, arg_setup_string
 
 #
 # Developers:
@@ -20,6 +20,9 @@ parser = argparse.ArgumentParser(
 # convert parser.parse_args() SimpleNamespace to dictionary for unpackability.
 args = dict(vars(parser.parse_args()))
 
+# check for interactive input
+args = check_interactive(args)
+
 # Set charachters to use as pixels and reverse the order if reverse arg is true.
 set_chars(args)
 
@@ -37,19 +40,19 @@ def ascii_art(charW, charH, scale, image, output):
     width, height = im.size
     pix = im.load()
 
-    outputImage = Image.new("RGB", (charW * width, charH * height), color=(0, 0, 0))
+    outputImage = Image.new(
+        "RGB", (int(charW * width), int(charH * height)), color=(0, 0, 0)
+    )
     d = ImageDraw.Draw(outputImage)
 
     with open(f"{output}.txt", "w") as text_file:
         for i in range(height):
             for j in range(width):
-                r, g, b = pix[j, i]
-                h = int((r + g + b) / 3)
-                # pix[j, i] = (h, h, h)  # WFT?? i dunno....
+                h, r, g, b, = get_hrgb(pix[j, i])
                 char = getChar(h)
                 text_file.write(char)
                 d.text(
-                    (j * charW, i * charH), char, font=fnt, fill=(r, g, b),
+                    (int(j * charW), int(i * charH)), char, font=fnt, fill=(r, g, b),
                 )
 
             text_file.write("\n")
