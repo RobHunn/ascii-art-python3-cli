@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import argparse
-from helper import set_chars, getChar, arg_setup_string
+from helper import arg_setup_string, check_interactive, set_chars, getChar, get_hrgb
 
 #
 # Developers:
@@ -14,21 +14,24 @@ from helper import set_chars, getChar, arg_setup_string
 parser = argparse.ArgumentParser(
     description="Turn any photo into ascii art from the Command Line."
 )
-#  Add all parser arguments from helper file
+#  Add all parser arguments from helper file.
 [eval(w) for w in arg_setup_string.split("|")]
 
 # convert parser.parse_args() SimpleNamespace to dictionary for unpackability.
 args = dict(vars(parser.parse_args()))
 
+# check for interactive input.
+args = check_interactive(args)
+
 # Set charachters to use as pixels and reverse the order if reverse arg is true.
 set_chars(args)
 
 
-def ascii_art(charW, charH, scale, image, output):
+def ascii_art(image, font_size, scale, charW, charH, output):
     """Function to convert image into ascii art. Photo and text output."""
     im = Image.open(image)
 
-    fnt = ImageFont.truetype("arial.ttf", 15)
+    fnt = ImageFont.truetype("arial.ttf", int(font_size))
 
     width, height = im.size
     im = im.resize(
@@ -37,19 +40,19 @@ def ascii_art(charW, charH, scale, image, output):
     width, height = im.size
     pix = im.load()
 
-    outputImage = Image.new("RGB", (charW * width, charH * height), color=(0, 0, 0))
+    outputImage = Image.new(
+        "RGB", (int(charW * width), int(charH * height)), color=(0, 0, 0)
+    )
     d = ImageDraw.Draw(outputImage)
 
     with open(f"{output}.txt", "w") as text_file:
         for i in range(height):
             for j in range(width):
-                r, g, b = pix[j, i]
-                h = int((r + g + b) / 3)
-                # pix[j, i] = (h, h, h)  # WFT?? i dunno....
+                h, r, g, b, = get_hrgb(pix[j, i])
                 char = getChar(h)
                 text_file.write(char)
                 d.text(
-                    (j * charW, i * charH), char, font=fnt, fill=(r, g, b),
+                    (int(j * charW), int(i * charH)), char, font=fnt, fill=(r, g, b),
                 )
 
             text_file.write("\n")
